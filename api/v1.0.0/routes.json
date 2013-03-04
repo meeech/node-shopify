@@ -1,0 +1,65 @@
+{
+    "defines": {
+        "constants": {
+            "name": "Shopify",
+            "description": "A Node.JS module, which provides an object oriented wrapper for the Shopify API.",
+            "protocol": "https",
+            "host": "klocko-and-sons3230.myshopify.com",
+            "port": 443,
+            "dateFormat": "YYYY-MM-DDTHH:MM:SSZ",
+            "requestFormat": "json"
+        },
+        "response-headers": [
+            "X-RateLimit-Limit",
+            "X-RateLimit-Remaining",
+            "X-Oauth-Scopes",
+            "Link"
+        ],
+        "params": {
+            "page": {
+                "type": "Number",
+                "required": false,
+                "validation": "^[0-9]+$",
+                "invalidmsg": "",
+                "description": "Page number of the results to fetch."
+            },
+            "limit": {
+                "type": "Number",
+                "required": false,
+                "validation": "^[0-9]+$",
+                "invalidmsg": "",
+                "description": "A custom page size up to 250. Default is 50."
+            }
+        }
+    },
+
+    "products": {
+        "get": {
+            "url": "/admin/products.json",
+            "method": "GET",
+            "params": {
+                "$page": null,
+                "$limit": null
+            }
+        },
+        "count": {
+            "url": "/admin/products/count.json",
+            "method": "GET",
+            "params": {
+                "$page": null,
+                "$limit": null
+            }
+        }
+    },
+
+    "gists": {
+        "get-all": {
+            "url": "/gists",
+            "method": "GET",
+            "params": {
+                "$page": null,
+                "$limit": null
+            }
+        }
+    }
+}
