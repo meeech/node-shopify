@@ -15,6 +15,13 @@
             "Link"
         ],
         "params": {
+            "id": {
+                "type": "Number",
+                "required": true,
+                "validation": "^[0-9]+$",
+                "invalidmsg": "",
+                "description": "ID of item. "
+            },
             "limit": {
                 "type": "Number",
                 "required": false,
@@ -30,113 +37,143 @@
                 "description": "Page to show (default: 1)"
             },
             "since_id": {
-              "type": "Number",
-              "required": false,
-              "validation": "^[0-9]+$",
-              "invalidmsg": "",
-              "description": "Restrict results to after the specified ID"
+                "type": "Number",
+                "required": false,
+                "validation": "^[0-9]+$",
+                "invalidmsg": "",
+                "description": "Restrict results to after the specified ID"
             },
             "vendor": {
-              "type": "String",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Filter by product vendor"
+                "type": "String",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Filter by product vendor"
             },
             "handle": {
-              "type": "String",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Filter by product handle"
+                "type": "String",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Filter by handle"
             },
             "product_type": {
-              "type": "String",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Filter by product type"
+                "type": "String",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Filter by product type"
             },
             "collection_id": {
-              "type": "Number",
-              "required": false,
-              "validation": "^[0-9]+$",
-              "invalidmsg": "",
-              "description": "Filter by collection ID"
+                "type": "Number",
+                "required": false,
+                "validation": "^[0-9]+$",
+                "invalidmsg": "",
+                "description": "Filter by collection ID"
             },
             "created_at_min": {
-              "type": "Date",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Show item created after date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
+                "type": "Date",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Show item created after date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
             },
             "created_at_max": {
-              "type": "Date",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Show item created before date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
+                "type": "Date",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Show item created before date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
             },
             "updated_at_min": {
-              "type": "Date",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Show item last updated after date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
+                "type": "Date",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Show item last updated after date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
             },
             "updated_at_max": {
-              "type": "Date",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Show item last updated before date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
+                "type": "Date",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Show item last updated before date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
             },
             "published_at_min": {
-              "type": "Date",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Show item published after date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
+                "type": "Date",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Show item published after date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
             },
             "published_at_max": {
-              "type": "Date",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Show item published before date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
+                "type": "Date",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Show item published before date (format: 2008-01-01 03:00 (Assumes UTC) or 2008-01-10T11:00:00-05:00)"
             },
             "published_status": {
-              "type": "String",
-              "required": false,
-              "validation": "^(published|unpublished|any)$",
-              "invalidmsg": "",
-              "description": "Filter by published_status published|unpublished|any (default: any)"
+                "type": "String",
+                "required": false,
+                "validation": "^(published|unpublished|any)$",
+                "invalidmsg": "",
+                "description": "Filter by published_status published|unpublished|any (default: any)"
             },
             "fields": {
-              "type": "String",
-              "required": false,
-              "validation": "",
-              "invalidmsg": "",
-              "description": "Comma-seperated list of fields to include in the response"
+                "type": "String",
+                "required": false,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Comma-seperated list of fields to include in the response"
             }
         }
         
     },
 
     "products": {
-        "get": {
+        "all": {
             "url": "/admin/products.json",
             "method": "GET",
             "params": {
                 "$limit": null,
-                "$page": null
+                "$page": null,
+                "$since_id": null,
+                "$vendor": null,
+                "$handle": null,
+                "$product_type": null,
+                "$collection_id": null,
+                "$created_at_min": null,
+                "$created_at_max": null,
+                "$updated_at_min": null,
+                "$updated_at_max": null,
+                "$published_at_min": null,
+                "$published_at_max": null,
+                "$published_status": null,
+                "$fields": null
+            }
+        },
+        "get": {
+            "url": "/admin/products/:id.json",
+            "method": "GET",
+            "params": {
+                "$id": null,
+                "$fields": null
             }
         },
         "count": {
             "url": "/admin/products/count.json",
             "method": "GET",
             "params": {
+                "$vendor": null,
+                "$product_type": null,
+                "$collection_id": null,
+                "$created_at_min": null,
+                "$created_at_max": null,
+                "$updated_at_min": null,
+                "$updated_at_max": null,
+                "$published_at_min": null,
+                "$published_at_max": null,
                 "$published_status": null
             }
         }
