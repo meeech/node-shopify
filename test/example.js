@@ -1,61 +1,37 @@
-/** section: github, internal
+/** section: shopify, internal
  *  Example
  * 
- *  Github API usage example.
+ *  Shopify API usage example.
  * 
- *  Copyright 2012 Cloud9 IDE, Inc.
- *
- *  This product includes software developed by
- *  Cloud9 IDE, Inc (http://c9.io).
- *
- *  Author: Mike de Boer <mike@c9.io>
  **/
-
-"use strict";
 
 var Client = require("./../index");
 
 var shopify = new Client({
-    debug: true,
-    version: "1.0.0"
+    debug: true
+    ,version: "1.0.0"
+    ,host: "klocko-and-sons3230.myshopify.com"
 });
 
+//You are responsible for getting the token yourself. 
+//I use everyauth for oauth authentication.
 shopify.authenticate({
   type: "oauth"
   ,token: "ccb5ce310b83fc919c26195546118126"
 });
 
 shopify.products.count({}, function(err, res) {
-  console.log('-> Products Count');
-  console.log("Error:",err);
+  if(err) {
+    console.log("Error:",err);
+    return;
+  }
   console.log("Result:",res);
 });
 
-shopify.products.count({}, function(err, res) {
-  console.log('-> Products Count');
-  console.log("Error:",err);
+shopify.products.get({limit:3}, function(err, res) {
+  if(err) {
+    console.log("Error:",err);
+    return;
+  }
   console.log("Result:",res);
 });
-
-shopify.products.get({limit:10}, function(err, res) {
-  console.log('-> Products Get');
-  console.log("Error:",err);
-  console.log("Result:",res);
-});
-/*
-github.authenticate({
-    type: "basic",
-    username: "mikedeboer",
-    password: "mysecretpass"
-});
-
-github.user.get({}, function(err, res) {
-    console.log("GOT ERR?", err);
-    console.log("GOT RES?", res);
-
-    github.repos.getAll({}, function(err, res) {
-        console.log("GOT ERR?", err);
-        console.log("GOT RES?", res);
-    });
-});
-*/
