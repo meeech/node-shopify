@@ -26,11 +26,24 @@ describe("[products]", function() {
         });
     });
 
-    it("should successfully execute GET /admin/products (get)",  function(next) {
-        client.products.get(
+    it("should successfully execute GET /admin/products.json (all)",  function(next) {
+        client.products.all(
             {
+                limit: "Number",
                 page: "Number",
-                limit: "Number"
+                since_id: "Number",
+                vendor: "String",
+                handle: "String",
+                product_type: "String",
+                collection_id: "Number",
+                created_at_min: "Date",
+                created_at_max: "Date",
+                updated_at_min: "Date",
+                updated_at_max: "Date",
+                published_at_min: "Date",
+                published_at_max: "Date",
+                published_status: "String",
+                fields: "String"
             },
             function(err, res) {
                 Assert.equal(err, null);
@@ -40,11 +53,33 @@ describe("[products]", function() {
         );
     });
 
-    it("should successfully execute GET /admin/products/count (count)",  function(next) {
+    it("should successfully execute GET /admin/products/:id.json (get)",  function(next) {
+        client.products.get(
+            {
+                id: "Number",
+                fields: "String"
+            },
+            function(err, res) {
+                Assert.equal(err, null);
+                // other assertions go here
+                next();
+            }
+        );
+    });
+
+    it("should successfully execute GET /admin/products/count.json (count)",  function(next) {
         client.products.count(
             {
-                page: "Number",
-                limit: "Number"
+                vendor: "String",
+                product_type: "String",
+                collection_id: "Number",
+                created_at_min: "Date",
+                created_at_max: "Date",
+                updated_at_min: "Date",
+                updated_at_max: "Date",
+                published_at_min: "Date",
+                published_at_max: "Date",
+                published_status: "String"
             },
             function(err, res) {
                 Assert.equal(err, null);

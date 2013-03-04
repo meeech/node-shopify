@@ -41,7 +41,7 @@ var main = module.exports = function(versions) {
         function createComment(paramsStruct, section, funcName, indent) {
             var params = Object.keys(paramsStruct);
             var comment = [
-                indent + "/** section: github",
+                indent + "/** section: shopify",
                 indent + " *  " + section + "#" + funcName + "(msg, callback) -> null",
                 indent + " *      - msg (Object): Object that contains the parameters and their values to be sent to the server.",
                 indent + " *      - callback (Function): function to call when the request is finished " +

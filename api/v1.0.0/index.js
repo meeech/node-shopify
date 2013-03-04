@@ -32,7 +32,7 @@ var proto = {
     }
 };
 
-["products", "gists"].forEach(function(api) {
+["products"].forEach(function(api) {
     Util.extend(proto, require("./" + api));
 });
 
