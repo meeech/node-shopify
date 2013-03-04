@@ -14,40 +14,25 @@ var Client = require("./../../index");
 
 describe("[products]", function() {
     var client;
-    var token = "c286e38330e15246a640c2cf32a45ea45d93b2ba";
 
     beforeEach(function() {
         client = new Client({
             version: "1.0.0"
-        });
-        client.authenticate({
-            type: "oauth",
-            token: token
+            ,host: "klocko-and-sons3230.myshopify.com"
+            ,token: "ccb5ce310b83fc919c26195546118126"
+            
         });
     });
 
     it("should successfully execute GET /admin/products.json (all)",  function(next) {
+        var limit = 5;
         client.products.all(
             {
-                limit: "Number",
-                page: "Number",
-                since_id: "Number",
-                vendor: "String",
-                handle: "String",
-                product_type: "String",
-                collection_id: "Number",
-                created_at_min: "Date",
-                created_at_max: "Date",
-                updated_at_min: "Date",
-                updated_at_max: "Date",
-                published_at_min: "Date",
-                published_at_max: "Date",
-                published_status: "String",
-                fields: "String"
+              limit: limit
             },
             function(err, res) {
                 Assert.equal(err, null);
-                // other assertions go here
+                Assert.equal(res.products.length, limit);
                 next();
             }
         );
@@ -56,34 +41,23 @@ describe("[products]", function() {
     it("should successfully execute GET /admin/products/:id.json (get)",  function(next) {
         client.products.get(
             {
-                id: "Number",
-                fields: "String"
+                id: "22133662"
+                ,fields: "title,handle,id"
             },
             function(err, res) {
                 Assert.equal(err, null);
-                // other assertions go here
+                Assert.equal(res.product.title, 'all-content');
+                Assert.equal(res.product.handle, 'all-content');
                 next();
             }
         );
     });
 
     it("should successfully execute GET /admin/products/count.json (count)",  function(next) {
-        client.products.count(
-            {
-                vendor: "String",
-                product_type: "String",
-                collection_id: "Number",
-                created_at_min: "Date",
-                created_at_max: "Date",
-                updated_at_min: "Date",
-                updated_at_max: "Date",
-                published_at_min: "Date",
-                published_at_max: "Date",
-                published_status: "String"
-            },
+        client.products.count({},
             function(err, res) {
                 Assert.equal(err, null);
-                // other assertions go here
+                Assert.notEqual(res.count, undefined);
                 next();
             }
         );
