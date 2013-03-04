@@ -176,6 +176,20 @@
                 "$published_at_max": null,
                 "$published_status": null
             }
+        },
+        "create": {
+            "url": "/admin/products.json",
+            "method": "POST",
+            "params": {
+                "product": {
+                    "type": "Object",
+                    "required": true,
+                    "validation": "",
+                    "invalidmsg": "",
+                    "description": "Product object"
+                }
+            }
+            
         }
     }
 }

@@ -14,6 +14,7 @@ var Client = require("./../../index");
 
 describe("[products]", function() {
     var client;
+    var to_delete_id; //Set when when we test create product
 
     beforeEach(function() {
         client = new Client({
@@ -48,7 +49,6 @@ describe("[products]", function() {
                 Assert.equal(err, null);
                 Assert.equal(res.product.title, 'all-content');
                 Assert.equal(res.product.handle, 'all-content');
-                console.log(res.product.options);
                 next();
             }
         );
@@ -63,4 +63,31 @@ describe("[products]", function() {
             }
         );
     });
+    
+    it("should successfully execute POST /admin/products.json (create)",  function(next) {
+        var title = "Test Product From API"
+            ,product_type = "Product Type"
+            ;
+            
+        client.products.create(
+            {
+                //The absolute minimum to create a product
+                product: {
+                    title: title
+                    ,product_type:product_type
+                }
+            },
+            function(err, res) {
+                Assert.equal(err, null);
+                console.log(res);
+                Assert.equal(res.product.title, title);
+                Assert.equal(res.product.product_type, product_type);
+                Assert.ok(res.product.id);
+                to_delete_id = res.product.id;
+                next();
+            }
+        );
+    });
+    
+    
 });
