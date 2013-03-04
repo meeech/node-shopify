@@ -48,6 +48,7 @@ describe("[products]", function() {
                 Assert.equal(err, null);
                 Assert.equal(res.product.title, 'all-content');
                 Assert.equal(res.product.handle, 'all-content');
+                console.log(res.product.options);
                 next();
             }
         );
