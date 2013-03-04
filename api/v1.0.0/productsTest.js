@@ -88,8 +88,11 @@ describe("[products]", function() {
         );
     });
     
-    it("should successfully execute DELETE /admin/products/:id.json (delete)",  function(next) {
-        client.products.count({},
+    it("should successfully execute DELETE /admin/products/:id.json (remove)",  function(next) {
+        client.products.remove(
+            {
+                id: to_delete_id
+            },
             function(err, res) {
                 Assert.equal(err, null);
                 console.log(res);
