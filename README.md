@@ -1,108 +1,58 @@
-# JavaScript GitHub API for Node.JS
+# JavaScript Shopify API for Node.JS
 
-A Node.JS module, which provides an object oriented wrapper for the GitHub v3 API.
+A Node.JS module, which provides an object oriented wrapper for the Shopify API.
 
 ## Installation
 
   Install with the Node.JS package manager [npm](http://npmjs.org/):
 
-      $ npm install github
+      $ npm install shopify-api
 
 or
 
   Install via git clone:
 
-      $ git clone git://github.com/mikedeboer/node-github.git
-      $ cd node-github
+      $ git clone git://github.com/meeech/node-shopify.git
+      $ cd node-shopify
       $ npm install
 
 ## Documentation
 
-You can find the docs for the API of this client at [http://mikedeboer.github.com/node-github/](http://mikedeboer.github.com/node-github/)
+You can find the docs for the API of this client at [http://meeech.github.com/node-shopify/](http://meeech.github.com/node-shopify/)
 
-Additionally, the [official Github documentation](http://developer.github.com/)
+Additionally, the [official Shopify documentation](http://api.shopify.com/)
 is a very useful resource.
+
+This module doesn't handle authentication. For that, I use [everyauth](https://github.com/bnoguchi/everyauth) to fetch the token for making requests.
 
 ## Example
 
-Print all followers of the user "mikedeboer" to the console.
+Fetch all unpublished products.
 
-    var GitHubApi = require("github");
+    var ShopifyApi = require("shopify");
 
-    var github = new GitHubApi({
+    var shopify = new ShopifyApi({
         // required
-        version: "3.0.0",
+        version: "1.0.0",
+        host: "SHOPNAME.myshopify.com",
+        token: "authtoken",
         // optional
         timeout: 5000
     });
-    github.user.getFollowingFromUser({
-        user: "mikedeboer"
+    
+    shopify.products.all({
+        limit: 5
     }, function(err, res) {
-        console.log(JSON.stringify(res));
+        console.log(res);
     });
-
-First the _GitHubApi_ class is imported from the _node-github_ module. This class provides
-access to all of GitHub's APIs (e.g. user, issues or repo APIs). The _getFollowingFromUser_
-method lists all followers of a given GitHub user. Is is part of the user API. It
-takes the user name as first argument and a callback as last argument. Once the
-follower list is returned from the server, the callback is called.
-
-Like in Node.JS, callbacks are always the last argument. If the functions fails an
-error object is passed as first argument to the callback.
 
 ## Authentication
 
-Most GitHub API calls don't require authentication. As a rule of thumb: If you
-can see the information by visiting the site without being logged in, you don't
-have to be authenticated to retrieve the same information through the API. Of
-course calls, which change data or read sensitive information have to be authenticated.
+This module doesn't handle authentication. For that, I use [everyauth](https://github.com/bnoguchi/everyauth) to fetch the token for making requests.
 
-You need the GitHub user name and the API key for authentication. The API key can
-be found in the user's _Account Settings_ page.
+## Implemented Shopify APIs
 
-This example shows how to authenticate and then change _location_ field of the
-account settings to _Argentina_:
-
-    github.authenticate({
-        type: "basic",
-        username: username,
-        password: password
-    });
-    github.user.update({
-        location: "Argentina"
-    }, function(err) {
-        console.log("done!");
-    });
-
-Note that the _authenticate_ method is synchronous because it only stores the
-credentials for the next request.
-
-Other examples for the various authentication methods:
-
-    // OAuth2
-    github.authenticate({
-        type: "oauth",
-        token: token
-    });
-
-    // Deprecated Gihub API token (seems not to be working with the v3 API)
-    github.authenticate({
-        type: "token",
-        token: token
-    });
-
-## Implemented GitHub APIs
-
-* Gists: 100%
-* Git Data: 100%
-* Issues: 100%
-* Orgs: 100%
-* Pull Requests: 100%
-* Repos: 100%
-* Users: 100%
-* Events: 100%
-* Search: 100%
-* Markdown: 100%
+* Products: 100%
 
 ## Running the Tests
 
@@ -114,11 +64,15 @@ Before running unit tests:
 
     npm install mocha -g
 
-At the moment, test classes can only be run separately. This will e.g. run the Issues Api test:
+At the moment, test classes can only be run separately. This will e.g. run the Products Api test:
 
-    mocha api/v3.0.0/issuesTest.js
+    mocha api/v1.0.0/productsTest.js
 
 Note that a connection to the internet is required to run the tests.
+
+## CREDITS
+
+Based off work of @mikedeboer on the node-github api module [http://github.com/mikedeboer/node-github](http://github.com/mikedeboer/node-github)
 
 ## LICENSE
 
