@@ -1,7 +1,7 @@
 /**
  *  class Shopify
  *
- *  A Node.JS module, which provides an object oriented wrapper for the Shopify v3 API.
+ *  A Node.JS module, which provides an object oriented wrapper for the Shopify API.
  *
  *  Copyright 2012 Ajax.org Services B.V.
  *
