@@ -83,11 +83,12 @@ describe("[products]", function() {
                 Assert.equal(res.product.product_type, product_type);
                 Assert.ok(res.product.id);
                 to_delete_id = res.product.id;
+                console.log("\nCreated product id: ", res.product.id);
                 next();
             }
         );
     });
-    
+
     it("should successfully execute DELETE /admin/products/:id.json (remove)",  function(next) {
         client.products.remove(
             {
@@ -95,8 +96,8 @@ describe("[products]", function() {
             },
             function(err, res) {
                 Assert.equal(err, null);
-                console.log(res);
-                Assert.equal(res, {});
+                console.log("\nDeleted product id: ", to_delete_id);
+                to_delete_id = null;
                 next();
             }
         );
