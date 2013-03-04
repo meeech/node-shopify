@@ -192,7 +192,7 @@ var main = module.exports = function(versions) {
                 .replace(/<%sectionName%>/g, section)
                 .replace("<%testBody%>", def.join("\n\n"));
             var path = dir + "/" + section + "Test.js";
-            if (Path.existsSync(path) && Math.abs(Fs.readFileSync(path, "utf8").length - body.length) >= 20) {
+            if (Fs.existsSync(path) && Math.abs(Fs.readFileSync(path, "utf8").length - body.length) >= 20) {
                 Util.log("Moving old test file to '" + path + ".bak' to preserve tests " +
                     "that were already implemented. \nPlease be sure te check this file " +
                     "and move all implemented tests back into the newly generated test!", "error");
