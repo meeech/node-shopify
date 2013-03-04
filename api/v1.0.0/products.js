@@ -167,9 +167,48 @@ var products = module.exports = {
      * 
      *  ##### Params on the `msg` object:
      * 
-     *  - product (Object): Required. Product object 
+     *  - product (Object): Required. Product object. title and product_type are minimum required to make a new product 
      **/
     this.create = function(msg, block, callback) {
+        var self = this;
+        this.client.httpSend(msg, block, function(err, res) {
+            if (err)
+                return self.sendError(err, null, msg, callback);
+
+            var ret;
+            try {
+                ret = res.data && JSON.parse(res.data);
+            }
+            catch (ex) {
+                if (callback)
+                    callback(new error.InternalServerError(ex.message), res);
+                return;
+            }
+            
+            if (!ret)
+                ret = {};
+            if (!ret.meta)
+                ret.meta = {};
+            ["x-ratelimit-limit", "x-ratelimit-remaining", "x-oauth-scopes", "link"].forEach(function(header) {
+                if (res.headers[header])
+                    ret.meta[header] = res.headers[header];
+            });
+            
+            if (callback)
+                callback(null, ret);
+        });
+    };
+
+    /** section: shopify
+     *  products#delete(msg, callback) -> null
+     *      - msg (Object): Object that contains the parameters and their values to be sent to the server.
+     *      - callback (Function): function to call when the request is finished with an error as first argument and result data as second argument.
+     * 
+     *  ##### Params on the `msg` object:
+     * 
+     *  - id (Number): Required. ID of item.  Validation rule: ` ^[0-9]+$ `.
+     **/
+    this.delete = function(msg, block, callback) {
         var self = this;
         this.client.httpSend(msg, block, function(err, res) {
             if (err)

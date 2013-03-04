@@ -79,7 +79,6 @@ describe("[products]", function() {
             },
             function(err, res) {
                 Assert.equal(err, null);
-                console.log(res);
                 Assert.equal(res.product.title, title);
                 Assert.equal(res.product.product_type, product_type);
                 Assert.ok(res.product.id);
@@ -89,5 +88,16 @@ describe("[products]", function() {
         );
     });
     
+    it("should successfully execute DELETE /admin/products/:id.json (delete)",  function(next) {
+        client.products.count({},
+            function(err, res) {
+                Assert.equal(err, null);
+                console.log(res);
+                Assert.equal(res, {});
+                next();
+            }
+        );
+    });
+  
     
 });

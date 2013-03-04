@@ -186,10 +186,16 @@
                     "required": true,
                     "validation": "",
                     "invalidmsg": "",
-                    "description": "Product object"
+                    "description": "Product object. title and product_type are minimum required to make a new product"
                 }
             }
-            
+        },
+        "delete": {
+            "url": "/admin/products/:id.json",
+            "method": "DELETE",
+            "params": {
+                "$id": null
+            }
         }
     }
 }
