@@ -4,7 +4,6 @@
             "name": "Shopify",
             "description": "A Node.JS module, which provides an object oriented wrapper for the Shopify API.",
             "protocol": "https",
-            "host": "klocko-and-sons3230.myshopify.com",
             "port": 443,
             "dateFormat": "YYYY-MM-DDTHH:MM:SSZ",
             "requestFormat": "json"
