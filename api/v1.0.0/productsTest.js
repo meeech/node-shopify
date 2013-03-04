@@ -38,8 +38,8 @@ describe("[products]", function() {
         );
     });
 
-    it("should successfully execute GET /admin/products/:id.json (get)",  function(next) {
-        client.products.get(
+    it("should successfully execute GET /admin/products/:id.json (one)",  function(next) {
+        client.products.one(
             {
                 id: "22133662"
                 ,fields: "title,handle,id"

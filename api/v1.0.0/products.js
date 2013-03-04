@@ -73,7 +73,7 @@ var products = module.exports = {
     };
 
     /** section: shopify
-     *  products#get(msg, callback) -> null
+     *  products#one(msg, callback) -> null
      *      - msg (Object): Object that contains the parameters and their values to be sent to the server.
      *      - callback (Function): function to call when the request is finished with an error as first argument and result data as second argument.
      * 
@@ -82,7 +82,7 @@ var products = module.exports = {
      *  - id (Number): Required. ID of item.  Validation rule: ` ^[0-9]+$ `.
      *  - fields (String): Optional. Comma-seperated list of fields to include in the response 
      **/
-    this.get = function(msg, block, callback) {
+    this.one = function(msg, block, callback) {
         var self = this;
         this.client.httpSend(msg, block, function(err, res) {
             if (err)

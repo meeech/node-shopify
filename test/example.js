@@ -26,7 +26,7 @@ shopify.products.all({limit:1}, function(err, res) {
   console.log("Result:",res);
 });
 
-shopify.products.get({
+shopify.products.one({
   id:22133662
   ,fields: "title,vendor,handle,id"
 }, function(err, res) {
