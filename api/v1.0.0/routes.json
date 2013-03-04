@@ -9,10 +9,7 @@
             "requestFormat": "json"
         },
         "response-headers": [
-            "X-RateLimit-Limit",
-            "X-RateLimit-Remaining",
-            "X-Oauth-Scopes",
-            "Link"
+            "x-shopify-shop-api-call-limit"
         ],
         "params": {
             "id": {
@@ -190,7 +187,7 @@
                 }
             }
         },
-        "delete": {
+        "remove": {
             "url": "/admin/products/:id.json",
             "method": "DELETE",
             "params": {
