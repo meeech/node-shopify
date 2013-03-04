@@ -11,13 +11,9 @@ var shopify = new Client({
     debug: true
     ,version: "1.0.0"
     ,host: "klocko-and-sons3230.myshopify.com"
-});
-
-//You are responsible for getting the token yourself. 
-//I use everyauth for oauth authentication.
-shopify.authenticate({
-  type: "oauth"
-  ,token: "ccb5ce310b83fc919c26195546118126"
+    //You are responsible for getting the token yourself 
+    //I use everyauth for oauth authentication.
+    ,token: "ccb5ce310b83fc919c26195546118126"
 });
 
 shopify.products.count({}, function(err, res) {

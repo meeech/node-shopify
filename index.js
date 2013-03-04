@@ -618,6 +618,7 @@ var Client = module.exports = function(config) {
 
         var headers = {
             "host": host,
+            "X-Shopify-Access-Token": this.config.token,
             "user-agent": "NodeJS HTTP Client",
             "content-length": "0"
         };
@@ -630,24 +631,6 @@ var Client = module.exports = function(config) {
             headers["content-type"] = format == "json"
                 ? "application/json"
                 : "application/x-www-form-urlencoded";
-        }
-        if (this.auth) {
-            var basic;
-            switch (this.auth.type) {
-                case "oauth":
-                    headers["X-Shopify-Access-Token"] = this.auth.token;
-                    break;
-                case "token":
-                    basic = new Buffer(this.auth.username + "/token:" + this.auth.token, "ascii").toString("base64");
-                    headers.authorization = "Basic " + basic;
-                    break;
-                case "basic":
-                    basic = new Buffer(this.auth.username + ":" + this.auth.password, "ascii").toString("base64");
-                    headers.authorization = "Basic " + basic;
-                    break;
-                default:
-                    break;
-            }
         }
 
         var options = {
