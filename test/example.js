@@ -16,18 +16,18 @@ var shopify = new Client({
     ,token: "ccb5ce310b83fc919c26195546118126"
 });
 
-shopify.products.count({}, function(err, res) {
+shopify.products.count({
+  published_status: 'any'
+}, function(err, res) {
   if(err) {
-    console.log("Error:",err);
-    return;
+    throw new Error(err);
   }
   console.log("Result:",res);
 });
 
-shopify.products.get({limit:3}, function(err, res) {
+shopify.products.get({limit:1}, function(err, res) {
   if(err) {
-    console.log("Error:",err);
-    return;
+    throw new Error(err);
   }
   console.log("Result:",res);
 });
