@@ -33,3 +33,13 @@ shopify.products.one({
   if(err) { throw new Error(err); }
   console.log("Result:",res);
 });
+
+shopify.products.update({
+  id: 22133662
+  ,product: {
+    published: false
+  }
+}, function(err, res) {
+  if(err) { throw new Error(err); }
+  console.log(res);
+});

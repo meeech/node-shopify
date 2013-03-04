@@ -187,6 +187,20 @@
                 }
             }
         },
+        "update": {
+            "url": "/admin/products/:id.json",
+            "method": "PUT",
+            "params": {
+                "$id": null,
+                "product": {
+                    "type": "Object",
+                    "required": true,
+                    "validation": "",
+                    "invalidmsg": "",
+                    "description": "Product object. Should include id."
+                }
+            }
+        },
         "remove": {
             "url": "/admin/products/:id.json",
             "method": "DELETE",
