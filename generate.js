@@ -183,6 +183,7 @@ var main = module.exports = function(versions) {
                 "utf8"
             );
 
+/*
             def = testSections[section];
             // test if previous tests already contained implementations by checking
             // if the difference in character count between the current test file
@@ -194,6 +195,7 @@ var main = module.exports = function(versions) {
             var path = dir + "/" + section + "Test.js";
             Util.log("Writing test file for " + section + ", version " + version);
             Fs.writeFileSync(path, body, "utf8");
+*/
         });
     });
 };
