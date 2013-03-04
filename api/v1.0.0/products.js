@@ -62,7 +62,7 @@ var products = module.exports = {
                 ret = {};
             if (!ret.meta)
                 ret.meta = {};
-            ["x-ratelimit-limit", "x-ratelimit-remaining", "x-oauth-scopes", "link"].forEach(function(header) {
+            ["x-shopify-shop-api-call-limit"].forEach(function(header) {
                 if (res.headers[header])
                     ret.meta[header] = res.headers[header];
             });
@@ -102,7 +102,7 @@ var products = module.exports = {
                 ret = {};
             if (!ret.meta)
                 ret.meta = {};
-            ["x-ratelimit-limit", "x-ratelimit-remaining", "x-oauth-scopes", "link"].forEach(function(header) {
+            ["x-shopify-shop-api-call-limit"].forEach(function(header) {
                 if (res.headers[header])
                     ret.meta[header] = res.headers[header];
             });
@@ -150,7 +150,7 @@ var products = module.exports = {
                 ret = {};
             if (!ret.meta)
                 ret.meta = {};
-            ["x-ratelimit-limit", "x-ratelimit-remaining", "x-oauth-scopes", "link"].forEach(function(header) {
+            ["x-shopify-shop-api-call-limit"].forEach(function(header) {
                 if (res.headers[header])
                     ret.meta[header] = res.headers[header];
             });
@@ -189,7 +189,7 @@ var products = module.exports = {
                 ret = {};
             if (!ret.meta)
                 ret.meta = {};
-            ["x-ratelimit-limit", "x-ratelimit-remaining", "x-oauth-scopes", "link"].forEach(function(header) {
+            ["x-shopify-shop-api-call-limit"].forEach(function(header) {
                 if (res.headers[header])
                     ret.meta[header] = res.headers[header];
             });
@@ -200,7 +200,7 @@ var products = module.exports = {
     };
 
     /** section: shopify
-     *  products#delete(msg, callback) -> null
+     *  products#remove(msg, callback) -> null
      *      - msg (Object): Object that contains the parameters and their values to be sent to the server.
      *      - callback (Function): function to call when the request is finished with an error as first argument and result data as second argument.
      * 
@@ -208,7 +208,7 @@ var products = module.exports = {
      * 
      *  - id (Number): Required. ID of item.  Validation rule: ` ^[0-9]+$ `.
      **/
-    this.delete = function(msg, block, callback) {
+    this.remove = function(msg, block, callback) {
         var self = this;
         this.client.httpSend(msg, block, function(err, res) {
             if (err)
@@ -228,7 +228,7 @@ var products = module.exports = {
                 ret = {};
             if (!ret.meta)
                 ret.meta = {};
-            ["x-ratelimit-limit", "x-ratelimit-remaining", "x-oauth-scopes", "link"].forEach(function(header) {
+            ["x-shopify-shop-api-call-limit"].forEach(function(header) {
                 if (res.headers[header])
                     ret.meta[header] = res.headers[header];
             });
