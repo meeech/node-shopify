@@ -43,31 +43,16 @@ describe("[products]", function() {
         );
     });
 
-    it("should successfully execute GET /admin/products/:id.json (one)",  function(next) {
-        client.products.one(
-            {
-                id: "22133662"
-                ,fields: "title,handle,id"
-            },
+    it("should successfully execute GET /admin/products/count.json (count)",  function(next) {
+        client.products.count({},
             function(err, res) {
                 Assert.equal(err, null);
-                Assert.equal(res.product.title, 'all-content');
-                Assert.equal(res.product.handle, 'all-content');
+                Assert.equal(res.count, 5);
                 next();
             }
         );
     });
 
-    it("should successfully execute GET /admin/products/count.json (count)",  function(next) {
-        client.products.count({},
-            function(err, res) {
-                Assert.equal(err, null);
-                Assert.notEqual(res.count, undefined);
-                next();
-            }
-        );
-    });
-    
     it("should successfully execute POST /admin/products.json (create)",  function(next) {
         var title = "Test Product From API"
             ,product_type = "Product Type"
@@ -88,6 +73,21 @@ describe("[products]", function() {
                 Assert.ok(res.product.id);
                 created_product_id = res.product.id;
                 console.log("\nCreated product id: ", res.product.id);
+                next();
+            }
+        );
+    });
+
+
+    it("should successfully execute GET /admin/products/:id.json (one)",  function(next) {
+        client.products.one(
+            {
+                id: created_product_id
+                ,fields: "title,handle,id"
+            },
+            function(err, res) {
+                Assert.equal(err, null);
+                Assert.ok(res.product.title);
                 next();
             }
         );
