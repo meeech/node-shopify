@@ -136,14 +136,21 @@
                 "required": true,
                 "validation": "",
                 "invalidmsg": "",
-                "description": "An Application Charge object"
+                "description": "An Application Charge object. See Shopify API for details."
+            },
+            "recurring_application_charge": {
+                "type": "Object",
+                "required": true,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "A Recurring Application Charge object. See Shopify API for details."
             },
             "item": {
                 "type": "Object",
                 "required": true,
                 "validation": "",
                 "invalidmsg": "",
-                "description": "Denotes an object. See Shopify API for details."
+                "description": "Generic object."
             }
         }
         
@@ -247,8 +254,46 @@
             "url": "/admin/application_charges/:id/activate.json",
             "method": "POST",
             "params": {
+                "$id": null
+            }
+        }
+    },
+    "recurring_application_charge": {
+        "all": {
+            "url": "/admin/recurring_application_charges.json",
+            "method": "GET",
+            "params": {
+                "$since_id": null,
+                "$fields": null
+            }
+        },
+        "one": {
+            "url": "/admin/recurring_application_charges/:id.json",
+            "method": "GET",
+            "params": {
                 "$id": null,
-                "$application_charge": null
+                "$fields": null
+            }
+        },
+        "create": {
+            "url": "/admin/recurring_application_charges.json",
+            "method": "POST",
+            "params": {
+                "$recurring_application_charge": null
+            }
+        },
+        "activate": {
+            "url": "/admin/recurring_application_charges/:id/activate.json",
+            "method": "POST",
+            "params": {
+                "$id": null
+            }
+        },
+        "cancel": {
+            "url": "/admin/recurring_application_charges/:id/activate.json",
+            "method": "DELETE",
+            "params": {
+                "$id": null
             }
         }
     }
