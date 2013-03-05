@@ -183,19 +183,19 @@ var main = module.exports = function(versions) {
                 "utf8"
             );
 
-/*
-            def = testSections[section];
-            // test if previous tests already contained implementations by checking
-            // if the difference in character count between the current test file
-            // and the newly generated one is more than twenty characters.
-            var body = TestSectionTpl
-                .replace("<%version%>", version.replace("v", ""))
-                .replace(/<%sectionName%>/g, section)
-                .replace("<%testBody%>", def.join("\n\n"));
-            var path = dir + "/" + section + "Test.js";
-            Util.log("Writing test file for " + section + ", version " + version);
-            Fs.writeFileSync(path, body, "utf8");
-*/
+            if (!Fs.existsSync(path)) {
+                def = testSections[section];
+                // test if previous tests already contained implementations by checking
+                // if the difference in character count between the current test file
+                // and the newly generated one is more than twenty characters.
+                var body = TestSectionTpl
+                    .replace("<%version%>", version.replace("v", ""))
+                    .replace(/<%sectionName%>/g, section)
+                    .replace("<%testBody%>", def.join("\n\n"));
+                var path = dir + "/" + section + "Test.js";
+                Util.log("Writing test file for " + section + ", version " + version);
+              Fs.writeFileSync(path, body, "utf8");
+            }
         });
     });
 };
