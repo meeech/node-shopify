@@ -16,7 +16,8 @@
         "node": ">=0.8.16"
     },
     "devDependencies": {
-        "oauth": "0.9.7"
+        "oauth": "0.9.7",
+        "mocha": "1.8.X"
     },
     "main" : ".",
     "scripts": {
