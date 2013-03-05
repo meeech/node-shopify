@@ -1,0 +1,4 @@
+* add some convenience methods to client
+    - api limit check
+    - shopify doesnt provide a next/prev, but can be built into client based on returned data?
+* all the other resources :D
