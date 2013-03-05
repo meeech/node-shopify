@@ -53,6 +53,7 @@ describe("[application_charge]", function() {
             {},
             function(err, res) {
                 Assert.equal(err, null);
+                Assert.ok(res.application_charges);
                 next();
             }
         );
@@ -76,19 +77,20 @@ describe("[application_charge]", function() {
         );
     });
 
-/*
+
     it("should successfully execute POST /admin/application_charges/:id/activate.json (activate)",  function(next) {
         client.application_charge.activate(
             {
-                id: "Number",
-                application_charge: "Object"
+                id: created_test_charge_id
             },
             function(err, res) {
-                Assert.equal(err, null);
-                // other assertions go here
+                //Should throw an error right now, 
+                //since we have no way to approve
+                Assert.equal(err.code, 422);
+
                 next();
             }
         );
-    });*/
+    });
 
 });
