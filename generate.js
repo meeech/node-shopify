@@ -183,6 +183,7 @@ var main = module.exports = function(versions) {
                 "utf8"
             );
 
+            var path = dir + "/" + section + "Test.js";
             if (!Fs.existsSync(path)) {
                 def = testSections[section];
                 // test if previous tests already contained implementations by checking
@@ -192,7 +193,7 @@ var main = module.exports = function(versions) {
                     .replace("<%version%>", version.replace("v", ""))
                     .replace(/<%sectionName%>/g, section)
                     .replace("<%testBody%>", def.join("\n\n"));
-                var path = dir + "/" + section + "Test.js";
+
                 Util.log("Writing test file for " + section + ", version " + version);
               Fs.writeFileSync(path, body, "utf8");
             }
