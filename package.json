@@ -4,10 +4,12 @@
     "description" : "NodeJS wrapper for the Shopify API",
     "author": "mitchell amihod <mitchell@amihod.com>",
     "contributors": [
-        { "name": "Mitchell Amihod", "email": "mitchell@amihod.com" },
-        { "name": "Fabian Jakobs", "email": "fabian@c9.io" }
+        { "name": "Mitchell Amihod", "email": "mitchell@amihod.com" }
     ],
     "homepage": "http://github.com/meeech/node-shopify",
+    "bugs": {
+        "url": "http://github.com/meeech/node-shopify/issues"
+    },
     "repository" : {
         "type" : "git",
         "url" : "http://github.com/meeech/node-shopify.git"
@@ -16,13 +18,9 @@
         "node": ">=0.8.16"
     },
     "devDependencies": {
-        "oauth": "0.9.7",
-        "mocha": "1.8.X"
+        "mocha": "1.8.x"
     },
     "main" : ".",
-    "scripts": {
-        "test": "node ./test/all.js"
-    },
     "licenses": [{
         "type": "The MIT License",
         "url": "http://www.opensource.org/licenses/mit-license.php"}
