@@ -4,7 +4,7 @@ var error = require("./error");
 var Util = require("./util");
 var Url = require("url");
 
-/** section: github
+/** section: shopify
  * class Client
  *
  *  Copyright 2012 Cloud9 IDE, Inc.

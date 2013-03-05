@@ -1,4 +1,4 @@
-/** section: github
+/** section: shopify
  * class HttpError
  * 
  *  Copyright 2012 Cloud9 IDE, Inc.
