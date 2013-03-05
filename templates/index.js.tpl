@@ -3,12 +3,9 @@
  *
  *  <%description%>
  *
- *  Copyright 2012 Ajax.org Services B.V.
- *
- *  This product includes software developed by
- *  Ajax.org Services B.V. (http://www.ajax.org/).
- *
- *  Author: Mike de Boer <info@mikedeboer.nl>
+ * Copyright 2013 Mitchell Amihod
+ * 
+ * Author: Mitchell Amihod <mitchell@amihod.com>
  **/
 
 "use strict";
