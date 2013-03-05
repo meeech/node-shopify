@@ -123,6 +123,27 @@
                 "validation": "",
                 "invalidmsg": "",
                 "description": "Comma-seperated list of fields to include in the response"
+            },
+            "product": {
+                "type": "Object",
+                "required": true,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Product object"
+            },
+            "application_charge": {
+                "type": "Object",
+                "required": true,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "An Application Charge object"
+            },
+            "item": {
+                "type": "Object",
+                "required": true,
+                "validation": "",
+                "invalidmsg": "",
+                "description": "Denotes an object. See Shopify API for details."
             }
         }
         
@@ -178,13 +199,7 @@
             "url": "/admin/products.json",
             "method": "POST",
             "params": {
-                "product": {
-                    "type": "Object",
-                    "required": true,
-                    "validation": "",
-                    "invalidmsg": "",
-                    "description": "Product object. title and product_type are minimum required to make a new product"
-                }
+                "$product": null
             }
         },
         "update": {
@@ -192,13 +207,7 @@
             "method": "PUT",
             "params": {
                 "$id": null,
-                "product": {
-                    "type": "Object",
-                    "required": true,
-                    "validation": "",
-                    "invalidmsg": "",
-                    "description": "Product object. Should include id."
-                }
+                "$product": null
             }
         },
         "remove": {
@@ -208,5 +217,40 @@
                 "$id": null
             }
         }
+    },
+    
+    "application_charge": {
+        "all": {
+            "url": "/admin/application_charges.json",
+            "method": "GET",
+            "params": {
+                "$since_id": null,
+                "$fields": null
+            }
+        },
+        "one": {
+            "url": "/admin/application_charges/:id.json",
+            "method": "GET",
+            "params": {
+                "$id": null,
+                "$fields": null
+            }
+        },
+        "create": {
+            "url": "/admin/application_charges.json",
+            "method": "POST",
+            "params": {
+                "$application_charge": null
+            }
+        },
+        "activate": {
+            "url": "/admin/application_charges/:id/activate.json",
+            "method": "POST",
+            "params": {
+                "$id": null,
+                "$application_charge": null
+            }
+        },
+        
     }
 }
