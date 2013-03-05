@@ -1,3 +1,5 @@
+# NOTE: This is a work in progress. Just testing it out now to see if it's suitable for me. Use at your own risk. There's still a lot of work to do. Based off the node-github package.
+
 # JavaScript Shopify API for Node.JS
 
 A Node.JS module, which provides an object oriented wrapper for the Shopify API.
