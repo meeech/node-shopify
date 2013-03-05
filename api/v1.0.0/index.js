@@ -32,7 +32,7 @@ var proto = {
     }
 };
 
-["products"].forEach(function(api) {
+["products", "application_charge"].forEach(function(api) {
     Util.extend(proto, require("./" + api));
 });
 

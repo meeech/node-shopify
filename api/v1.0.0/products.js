@@ -167,7 +167,7 @@ var products = module.exports = {
      * 
      *  ##### Params on the `msg` object:
      * 
-     *  - product (Object): Required. Product object. title and product_type are minimum required to make a new product 
+     *  - product (Object): Required. Product object 
      **/
     this.create = function(msg, block, callback) {
         var self = this;
@@ -207,7 +207,7 @@ var products = module.exports = {
      *  ##### Params on the `msg` object:
      * 
      *  - id (Number): Required. ID of item.  Validation rule: ` ^[0-9]+$ `.
-     *  - product (Object): Required. Product object. Should include id. 
+     *  - product (Object): Required. Product object 
      **/
     this.update = function(msg, block, callback) {
         var self = this;
