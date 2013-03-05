@@ -290,7 +290,7 @@
             }
         },
         "cancel": {
-            "url": "/admin/recurring_application_charges/:id/activate.json",
+            "url": "/admin/recurring_application_charges/:id.json",
             "method": "DELETE",
             "params": {
                 "$id": null

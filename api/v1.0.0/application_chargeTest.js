@@ -84,8 +84,7 @@ describe("[application_charge]", function() {
                 id: created_test_charge_id
             },
             function(err, res) {
-                //Should throw an error right now, 
-                //since we have no way to approve
+                //Should throw an error, since we have no way to approve a charge yet.
                 Assert.equal(err.code, 422);
 
                 next();

@@ -56,6 +56,7 @@ This module doesn't handle authentication. For that, I use [everyauth](https://g
 
 ## Implemented Shopify APIs
 
+* Billing: 100%
 * Products: 100%
 
 ## Running the Tests
