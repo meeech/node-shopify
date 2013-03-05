@@ -12,6 +12,10 @@
 var Assert = require("assert");
 var Client = require("./../../index");
 
+if(process.env['SHOPIFY_HOST'] === undefined) {
+    require('./../../env');
+}
+
 describe("[products]", function() {
     var client;
     var created_product_id; //Set when when we test create product
@@ -19,8 +23,8 @@ describe("[products]", function() {
     beforeEach(function() {
         client = new Client({
             version: "1.0.0"
-            ,host: "klocko-and-sons3230.myshopify.com"
-            ,token: "ccb5ce310b83fc919c26195546118126"
+            ,host: process.env['SHOPIFY_HOST']
+            ,token: process.env['SHOPIFY_TOKEN']
             
         });
     });

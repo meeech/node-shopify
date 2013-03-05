@@ -7,13 +7,17 @@
 
 var Client = require("./../index");
 
+if(process.env['SHOPIFY_HOST'] === undefined) {
+    require('./../env');
+}
+
 var shopify = new Client({
   debug: true
   ,version: "1.0.0"
-  ,host: "klocko-and-sons3230.myshopify.com"
+  ,host: process.env['SHOPIFY_HOST']
   //You are responsible for getting the token yourself 
   //I use everyauth for oauth authentication.
-  ,token: "ccb5ce310b83fc919c26195546118126"
+  ,token: process.env['SHOPIFY_TOKEN']
 });
 
 shopify.products.count({ published_status: 'any'}, function(err, res) {
