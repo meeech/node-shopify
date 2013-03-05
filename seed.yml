@@ -1,5 +1,0 @@
----
-  name: shopify-api
-  description: NodeJS wrapper for the Shopify API
-  tags: shopify web
-  version: 0.0.1
