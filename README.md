@@ -1,6 +1,8 @@
 # NOTE: This is a work in progress. Just testing it out now to see if it's suitable for me. Use at your own risk. There's still a lot of work to do. Based off the node-github package.
 
-# JavaScript Shopify API for Node.JS
+If you are curious, best place to start would be test/example.js.
+
+<!-- # JavaScript Shopify API for Node.JS
 
 A Node.JS module, which provides an object oriented wrapper for the Shopify API.
 
@@ -25,7 +27,7 @@ You can find the docs for the API of this client at [http://meeech.github.com/no
 Additionally, the [official Shopify documentation](http://api.shopify.com/)
 is a very useful resource.
 
-This module doesn't handle authentication. For that, I use [everyauth](https://github.com/bnoguchi/everyauth) to fetch the token for making requests.
+This module doesn't handle authentication. For that, I use [everyauth](https://github.com/bnoguchi/everyauth) to fetch the token for making requests. -->
 
 ## Example
 
