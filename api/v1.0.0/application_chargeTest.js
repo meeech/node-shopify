@@ -13,26 +13,29 @@ if(process.env['SHOPIFY_HOST'] === undefined) {
 }
 
 describe("[application_charge]", function() {
-  var client;
-  var created_test_charge_id;
-  var confirmation_url;
-  var auth_url = "https://" + process.env['SHOPIFY_HOST'] + "/admin/auth";
+  var client
+    , created_test_charge_id
+    , confirmation_url
+    , auth_url = "https://" + process.env['SHOPIFY_HOST'] + "/admin/auth"
+    , auth_cookies
+    ;
 
   beforeEach(function() {
     client = new Client({
-      version: "1.0.0",
-      host: process.env['SHOPIFY_HOST'],
-      token: process.env['SHOPIFY_TOKEN']
+      version: "1.0.0"
+      , host: process.env['SHOPIFY_HOST']
+      , token: process.env['SHOPIFY_TOKEN']
 
     });
   });
 
   it("should successfully execute POST /admin/application_charges.json (create)", function(next) {
+    this.timeout(4000);
     client.application_charge.create({
       application_charge: {
-        name: "Test Application One Time Charge",
-        price: "100.00",
-        test: true
+        name: "Test Application One Time Charge"
+        , price: "100.00"
+        , test: true
       }
     },
 
@@ -52,6 +55,7 @@ describe("[application_charge]", function() {
 
 
   it("should successfully execute GET /admin/application_charges.json (all)", function(next) {
+    this.timeout(4000);
     client.application_charge.all({},
 
     function(err, res) {
@@ -63,8 +67,8 @@ describe("[application_charge]", function() {
 
   it("should successfully execute GET /admin/application_charges/:id.json (one)", function(next) {
     client.application_charge.one({
-      id: created_test_charge_id,
-      fields: "id,name,price,confirmation_url"
+      id: created_test_charge_id
+      , fields: "id,name,price,confirmation_url"
     },
 
     function(err, res) {
@@ -79,79 +83,123 @@ describe("[application_charge]", function() {
     });
   });
 
-  it("should successfully accept the charge", function(next) {
+  it("should successfully login to the admin area", function(next) {
+
     this.timeout(0);
     var Chimera = require('chimera').Chimera;
     var c = new Chimera({
       disableImages: true
     });
 
-    //First, login like normal
     c.perform({
-      url: "https://" +
-    })
-    c.perform({
-      url: confirmation_url,
-      locals: {
-        username: process.env['SHOP_USERNAME'],
-        password: process.env['SHOP_PASSWORD']
-      },
-      run: function(callback) {
-        console.log('->Chimera Run');
-        console.log(document.location);
+      url: auth_url
+      , locals: {
+        username: process.env['SHOP_USERNAME']
+        , password: process.env['SHOP_PASSWORD']
+      }
+      , run: function(callback) {
+        console.log('->Auth-Login Run', document.location);
         try {
           var usernameInput;
-
           if (window.$ !== undefined) {
-            console.log('->looking up login input');
-            var usernameInput = $("login-input");
+            usernameInput = $("login-input");
           }
 
           if (usernameInput) {
             usernameInput.value = username;
             $("password").value = password;
-            chimera.capture("./screencaps/login-page.png");
 
             var submitButton = $$("form div.actions input.btn")[0];
             chimera.sendEvent('click', submitButton.measure("left") + 10, submitButton.measure("top") + 10);
           }
           else {
-            chimera.capture("./screencaps/success.png");
-            callback(null, "Success");
+            callback(null, document.location);
           }
         }
         catch (e) {
-          console.log('->Error in Chimera');
+          console.log('->Error in Auth-Login Chimera');
           chimera.capture('./screencaps/error.png');
           console.log(e);
         }
-      },
-      callback: function(err, result) {
-        console.log('->Chimera Callback');
-        console.log(c.cookies());
-        c.capture("./screencaps/loggedin-page.png");
+      }
+      , callback: function(err, result) {
+
+        auth_cookies = c.cookies();
+
+        Assert.equal(0, result.pathname.indexOf('/admin'));
+        Assert.notEqual(-1, auth_cookies.indexOf('_secure_session_id'));
+
         c.close();
-        console.log(result);
+        next();
+
       }
     });
-
-
-
   });
 
+  it("should successfully accept the charge", function(next) {
+    this.timeout(0);
+    var Chimera = require('chimera').Chimera;
+    var c = new Chimera({
+      disableImages: true
+      , cookies: auth_cookies
+    });
+    // console.log(decodeURIComponent(confirmation_url));
+    c.perform({
+      url: decodeURIComponent(confirmation_url)
+      , locals: {
+        already_clicked: false
+      }
+      , run: function(callback) {
+        console.log("->Accept Charge\n");
+        // chimera.capture('./screencaps/begin.png');
+        try {
+          console.log("->Begin Try Block\n");
+          console.log(document.location);
+          if(document.location.pathname.indexOf('subscription/confirm_') == -1) {
+            console.log("\n->Doing Callback");
+            callback(null, 'ok');
+          }
+          // window.jQuery("form div.actions input.btn")[0].click();
+          // already_clicked = true;
+          // callback(null);
+          // var acceptButton = $$("form div.actions input.btn")[0];
+          // chimera.capture("./screencaps/accept-charge-page.png");
+          var but = window.jQuery("form div.actions input.btn")[0];
+          var pos = window.jQuery(but).offset();
+          console.log(JSON.stringify(pos));
+          chimera.sendEvent('click', pos.left + 10, pos.top + 10);
+          setTimeout(function() {
+            callback(null, 'ok');
+          }, 4000);
+        }
+        catch (e) {
+          console.log('->Try Error');
+          console.log(e);
+          // chimera.capture('./screencaps/error.png');
+          callback(e, null);
+        }
+      },
+      callback: function(err, result) {
+        Assert.ifError(err);
+        // c.capture("./screencaps/accept-charge-callback.png");
+        c.close();
+        next();
+      }
+    });
+ });
 
 
-  it("should successfully execute POST /admin/application_charges/:id/activate.json (activate)", function(next) {
+/*  it("should successfully execute POST /admin/application_charges/:id/activate.json (activate)", function(next) {
     client.application_charge.activate({
       id: created_test_charge_id
     },
 
     function(err, res) {
       //Should throw an error, since we have no way to approve a charge yet.
-      Assert.equal(err.code, 422);
-
+      Assert.ifError(err);
+      // Assert.equal(err.code, 422);
       next();
     });
   });
-
+*/
 });
