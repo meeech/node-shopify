@@ -1,6 +1,6 @@
 /*
  * Copyright 2013 Mitchell Amihod
- * 
+ *
  * Author: Mitchell Amihod <mitchell@amihod.com>
  */
 
@@ -15,13 +15,14 @@ if(process.env['SHOPIFY_HOST'] === undefined) {
 describe("[application_charge]", function() {
     var client;
     var created_test_charge_id;
-    
+    var confirmation_url;
+
     beforeEach(function() {
         client = new Client({
             version: "1.0.0"
             ,host: process.env['SHOPIFY_HOST']
             ,token: process.env['SHOPIFY_TOKEN']
-            
+
         });
     });
 
@@ -37,11 +38,13 @@ describe("[application_charge]", function() {
             function(err, res) {
                 Assert.equal(err, null);
                 Assert.ok(res.application_charge);
-                Assert.ok(created_test_charge_id = res.application_charge.id);
-                //Can we:
-                    //grab the confirmation_url
-                    //parse out the form
-                    //Use the info from form to POST accept
+
+                created_test_charge_id = res.application_charge.id;
+                Assert.ok(created_test_charge_id);
+
+                confirmation_url = res.application_charge.confirmation_url;
+                console.log(confirmation_url);
+                Assert.ok(confirmation_url);
                 next();
             }
         );
@@ -70,12 +73,66 @@ describe("[application_charge]", function() {
                 Assert.equal(res.application_charge.id, created_test_charge_id);
                 Assert.ok(res.application_charge.name);
                 Assert.ok(res.application_charge.price);
-                Assert.ok(res.application_charge.confirmation_url);
+                Assert.equal(res.application_charge.confirmation_url, confirmation_url);
+                //Will throw an error if its true. basically check fields is respected.
                 Assert.ifError(res.application_charge.status);
                 next();
             }
         );
     });
+
+    it("should successfully accept the charge", function(next) {
+        this.timeout(0);
+        var Chimera = require('chimera').Chimera;
+        var c = new Chimera({
+            disableImages: true
+        });
+        c.perform({
+            url: confirmation_url,
+            locals: {
+                username: process.env['SHOP_USERNAME'],
+                password: process.env['SHOP_PASSWORD']
+            },
+            run: function(callback) {
+                console.log('->Chimera Run');
+                try{
+                    var usernameInput;
+                    console.log(chimera.cookies());
+                    if($ !== undefined) {
+                        var usernameInput = $("login-input");
+                    }
+
+                    if(usernameInput) {
+                        usernameInput.value = username;
+                        $("password").value = password;
+                        chimera.capture("./screencaps/login-page.png");
+
+                        var submitButton = $$("form div.actions input.btn")[0];
+                        chimera.sendEvent('click', submitButton.measure("left") + 10, submitButton.measure("top") + 10);
+                        // callback(null, "Success");
+                    }
+                    else{
+                        callback(null, "Success");
+                    }
+                }
+                catch (e) {
+                    console.log('->Error in Chimera');
+                    chimera.capture('./screencaps/error.png');
+                    console.log(e);
+                }
+            },
+            callback: function(err, result) {
+                console.log('->Chimera Callback');
+                c.capture("./screencaps/loggedin-page.png");
+                c.close();
+                console.log(result);
+            }
+        });
+
+
+
+    });
+
 
 
     it("should successfully execute POST /admin/application_charges/:id/activate.json (activate)",  function(next) {
