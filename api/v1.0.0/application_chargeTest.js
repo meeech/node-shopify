@@ -95,10 +95,12 @@ describe("[application_charge]", function() {
             },
             run: function(callback) {
                 console.log('->Chimera Run');
+                console.log(document.location);
                 try{
                     var usernameInput;
-                    console.log(chimera.cookies());
-                    if($ !== undefined) {
+
+                    if(window.$ !== undefined) {
+                        console.log('->looking up login input');
                         var usernameInput = $("login-input");
                     }
 
@@ -109,9 +111,9 @@ describe("[application_charge]", function() {
 
                         var submitButton = $$("form div.actions input.btn")[0];
                         chimera.sendEvent('click', submitButton.measure("left") + 10, submitButton.measure("top") + 10);
-                        // callback(null, "Success");
                     }
                     else{
+                        chimera.capture("./screencaps/success.png");
                         callback(null, "Success");
                     }
                 }
@@ -123,6 +125,7 @@ describe("[application_charge]", function() {
             },
             callback: function(err, result) {
                 console.log('->Chimera Callback');
+                console.log(c.cookies());
                 c.capture("./screencaps/loggedin-page.png");
                 c.close();
                 console.log(result);
