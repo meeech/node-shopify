@@ -18,7 +18,8 @@
         "node": ">=0.8.16"
     },
     "devDependencies": {
-        "mocha": "1.8.x"
+        "mocha": "1.8.x",
+        "chimera": "0.3.x"
     },
     "main" : ".",
     "licenses": [{
