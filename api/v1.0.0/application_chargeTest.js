@@ -16,6 +16,7 @@ describe("[application_charge]", function() {
     var client;
     var created_test_charge_id;
     var confirmation_url;
+    var auth_url = "https://" + process.env['SHOPIFY_HOST'] + "/admin/auth";
 
     beforeEach(function() {
         client = new Client({
@@ -87,6 +88,11 @@ describe("[application_charge]", function() {
         var c = new Chimera({
             disableImages: true
         });
+
+        //First, login like normal
+        c.perform({
+            url: "https://" +
+        })
         c.perform({
             url: confirmation_url,
             locals: {
