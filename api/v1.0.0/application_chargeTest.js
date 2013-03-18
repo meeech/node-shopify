@@ -136,6 +136,10 @@ describe("[application_charge]", function() {
     });
   });
 
+  //NOTE: We have the callback url for the APP setup in testing-server.js
+  //This should be running or this test will fail, since chimera seems to hang
+  //when endpoint doesn't exist.
+  //@todo fireup http server when running test.
   it("should successfully accept the charge", function(next) {
     this.timeout(0);
     var Chimera = require('chimera').Chimera;
@@ -143,63 +147,49 @@ describe("[application_charge]", function() {
       disableImages: true
       , cookies: auth_cookies
     });
-    // console.log(decodeURIComponent(confirmation_url));
+
     c.perform({
       url: decodeURIComponent(confirmation_url)
       , locals: {
         already_clicked: false
       }
       , run: function(callback) {
-        console.log("->Accept Charge\n");
-        // chimera.capture('./screencaps/begin.png');
         try {
-          console.log("->Begin Try Block\n");
-          console.log(document.location);
-          if(document.location.pathname.indexOf('subscription/confirm_') == -1) {
-            console.log("\n->Doing Callback");
+          var pathname = document.location.pathname;
+          if(window && window.jQuery && (pathname.indexOf('subscription/confirm_') > -1)) {
+            var form = window.jQuery("form")[0];
+            if(form) {
+              form.submit();
+            }
+          }
+          else {
             callback(null, 'ok');
           }
-          // window.jQuery("form div.actions input.btn")[0].click();
-          // already_clicked = true;
-          // callback(null);
-          // var acceptButton = $$("form div.actions input.btn")[0];
-          // chimera.capture("./screencaps/accept-charge-page.png");
-          var but = window.jQuery("form div.actions input.btn")[0];
-          var pos = window.jQuery(but).offset();
-          console.log(JSON.stringify(pos));
-          chimera.sendEvent('click', pos.left + 10, pos.top + 10);
-          setTimeout(function() {
-            callback(null, 'ok');
-          }, 4000);
         }
         catch (e) {
-          console.log('->Try Error');
-          console.log(e);
-          // chimera.capture('./screencaps/error.png');
           callback(e, null);
         }
       },
       callback: function(err, result) {
         Assert.ifError(err);
-        // c.capture("./screencaps/accept-charge-callback.png");
         c.close();
+        // c.capture("./screencaps/accept-charge-callback.png");
         next();
       }
     });
  });
 
 
-/*  it("should successfully execute POST /admin/application_charges/:id/activate.json (activate)", function(next) {
+  it("should successfully execute POST /admin/application_charges/:id/activate.json (activate)", function(next) {
     client.application_charge.activate({
       id: created_test_charge_id
     },
-
     function(err, res) {
       //Should throw an error, since we have no way to approve a charge yet.
+      console.log(err);
       Assert.ifError(err);
-      // Assert.equal(err.code, 422);
       next();
     });
   });
-*/
+
 });
