@@ -125,7 +125,6 @@ describe("[application_charge]", function() {
       , callback: function(err, result) {
 
         auth_cookies = c.cookies();
-
         Assert.equal(0, result.pathname.indexOf('/admin'));
         Assert.notEqual(-1, auth_cookies.indexOf('_secure_session_id'));
 
@@ -147,7 +146,7 @@ describe("[application_charge]", function() {
       disableImages: true
       , cookies: auth_cookies
     });
-
+    console.log( "\n", 'confirmation_url', confirmation_url );
     c.perform({
       url: decodeURIComponent(confirmation_url)
       , locals: {
@@ -155,8 +154,10 @@ describe("[application_charge]", function() {
       }
       , run: function(callback) {
         try {
+          console.log( '->RUN' );
           var pathname = document.location.pathname;
-          if(window && window.jQuery && (pathname.indexOf('subscription/confirm_') > -1)) {
+          console.log( 'pathname', pathname );
+          if(window && window.jQuery && (pathname.indexOf('charges/confirm_') > -1)) {
             var form = window.jQuery("form")[0];
             if(form) {
               form.submit();
@@ -171,13 +172,13 @@ describe("[application_charge]", function() {
         }
       },
       callback: function(err, result) {
+        c.capture("./screencaps/accept-charge-callback.png");
         Assert.ifError(err);
         c.close();
-        // c.capture("./screencaps/accept-charge-callback.png");
         next();
       }
     });
- });
+  });
 
 
   it("should successfully execute POST /admin/application_charges/:id/activate.json (activate)", function(next) {
@@ -185,8 +186,7 @@ describe("[application_charge]", function() {
       id: created_test_charge_id
     },
     function(err, res) {
-      //Should throw an error, since we have no way to approve a charge yet.
-      console.log(err);
+      // console.log(err);
       Assert.ifError(err);
       next();
     });
