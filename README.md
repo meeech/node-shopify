@@ -65,6 +65,10 @@ The unit tests are based on the [mocha](http://visionmedia.github.com/mocha/)
 module, which may be installed via npm. To run the tests make sure that the
 npm dependencies are installed by running `npm install` from the project directory.
 
+You will need to create env.js. Use env.sample.js as your template for that. 
+
+Some tests, like Application Charge, need the Token from an app, and also needs the callback server to be operational. There is a simple testing-server.js you can spin up. 
+
 Before running unit tests:
 
     npm install mocha -g
