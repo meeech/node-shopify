@@ -2,3 +2,4 @@
     - api limit check
     - shopify doesnt provide a next/prev, but can be built into client based on returned data?
 * all the other resources :D
+* run http server at 127.0.0.1 for the application charge test callback
