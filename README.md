@@ -61,7 +61,7 @@ This module doesn't handle authentication. For that, I use [everyauth](https://g
 
 ## Running the Tests
 
-The unit tests are based on the [mocha](http://visionmedia.github.com/mocha/)
+The unit tests are based on the [mocha](http://mochajs.org/)
 module, which may be installed via npm. To run the tests make sure that the
 npm dependencies are installed by running `npm install` from the project directory.
 
